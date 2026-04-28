@@ -1,19 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat</title>
 </head>
 <body>
+
 <h1>AI Chat</h1>
 
-<form th:text="response"></form>
+<!-- Display AI response -->
+<div th:if="${response}">
+    <h3>Response:</h3>
+    <p th:text="${response}"></p>
+</div>
 
-<form th:action="@{/aichat}" method="post">
+<!-- Chat form -->
+<form th:action="@{/}" method="post">
     <label for="prompt">Message:</label>
-    <input type="text" id="prompt" name="prompt">
+    <input type="text" id="prompt" name="prompt" required>
     <button type="submit">Send</button>
 </form>
+
+<br>
+
+<!-- Link to chat history -->
+<a th:href="@{/history}">View Chat History</a>
 
 </body>
 </html>

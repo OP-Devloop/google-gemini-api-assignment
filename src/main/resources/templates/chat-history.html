@@ -1,26 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat History</title>
 </head>
 <body>
-<div th:each="entry : ${chatHistory}">
 
-    <tr th:each="aichat : ${entry.value}">
+<h1>Saved Chat History</h1>
 
-        <td>
-            <span th:text="${aichat.prompt}">Product Name</span>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Prompt</th>
+        <th>Response</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(chatHistory)}">
+        <td colspan="3">No chat history found.</td>
+    </tr>
 
-        </td>
+    <tr th:each="aichat : ${chatHistory}">
+        <td th:text="${aichat.prompt}">Prompt</td>
+        <td th:text="${aichat.response}">Response</td>
+    </tr>
+    </tbody>
+</table>
 
-        <!-- Price -->
-        <td th:text="${product.price.intValue()}"></td>
+<br>
 
-        <!-- Stock -->
-        <td th:text="${product.stock}"
-            th:classappend="${product.stock < 5} ? 'low-stock' : ''">
-        </td>
-</div>
+<a th:href="@{/}">Back to Chat</a>
+
 </body>
 </html>
