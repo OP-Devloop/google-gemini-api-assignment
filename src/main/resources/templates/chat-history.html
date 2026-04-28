@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="entry : ${chatHistory}">
+
+    <tr th:each="aichat : ${entry.value}">
+
+        <td>
+            <span th:text="${aichat.prompt}">Product Name</span>
+
+        </td>
+
+        <!-- Price -->
+        <td th:text="${product.price.intValue()}"></td>
+
+        <!-- Stock -->
+        <td th:text="${product.stock}"
+            th:classappend="${product.stock < 5} ? 'low-stock' : ''">
+        </td>
+</div>
+</body>
+</html>
